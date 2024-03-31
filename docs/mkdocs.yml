@@ -1,0 +1,5 @@
+﻿site_name: Resilient eShop Docs
+
+nav:
+  - Home: index.md
+  - Architecture: architecture/architecture.md
