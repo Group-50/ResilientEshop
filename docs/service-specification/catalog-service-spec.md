@@ -39,16 +39,19 @@ Polly
 
 ## Queries Handled
 
-- getProducts
-- getProductsById
-- getProductsByBrandId
-- getProductsByCatalogTypeId
+- **GetProducts** - Get all products. Returns list of **ProductDTO**
 
-- getCatalogBrands
-- getCatalogBrandById
+- **GetProductById** - Get a product by Id. Returns **ProductDTO**
 
+- **GetProductsById** - Get products by Ids. Returns list of **ProductDTO**
 
-- getCatalogTypes
+- **GetProductsByBrandId** - Get products by BrandId. Returns list of **ProductDTO**
+
+- **GetProductsByTypeId** - Get products by Catalog Type Id. Returns list of **ProductDTO**
+
+- **GetCatalogBrands** - Get all Brands. Returns **CatalogBrandsDTO**
+
+- **GetCatalogTypes** - Get all Catalog Types. Returns **CatalogTypesDTO**
 
 
 ## Events Emitted
@@ -57,27 +60,84 @@ Polly
 
 ## API Endpoints
 
-- api/products
-  - Get
-- api/products{productId}
-  - Post
-  - Get
-- api/brands
-  - Get
-- api/brands{brandId}
-  - Get
-- api/catalogs
-  - Get
+| HTTP | Endpoint                              | Action                   | Auth |
+|------|---------------------------------------|--------------------------|------|
+| GET  | api/products                          | Get All Products         |      |
+| GET  | api/products/by                       | Get Products by Ids      |      |
+| GET  | api/products/{productId}              | Get Product by Id        |      |
+| GET  | api/products/type/{typeId}            | Get Products by Type Id  |      |
+| GET  | api/products/type/all/brand/{brandId} | Get Products by Brand Id |      |
+| GET  | api/catalogbrands                     | Get Brands               |      |
+| GET  | api/catalogtypes                      | Get all Catalog Types    |      |
 
 ## Models
 
 ### CatalogItem
 
+| Property Name  | Property Type                 | Default Value |
+|----------------|-------------------------------|---------------|
+| Id             | Int                           |               |
+| Name           | String                        |               |
+| Description    | String                        |               |
+| ImageUrl       | String                        |               |
+| CatalogTypeId  | Int                           |               |
+| CatalogType    | CatalogType                   |               |
+| CatalogBrandId | Int                           |               |
+| CatalogBrand   | CatalogBrand                  |               |
+| PriceHistory   | ICollection<CatalogItemPrice> |               |
+
 ### CatalogItemPrice
+
+| Property Name | Property Type | Default Value   |
+|---------------|---------------|-----------------|
+| Id            | Int           |                 |
+| ProductId     | Int           |                 |
+| EffectiveFrom | DateTime      |                 |
+| CreatedOn     | DateTime      | DateTime.UtcNow |
 
 ### CatalogType
 
+| Property Name | Property Type | Default Value |
+|---------------|---------------|---------------|
+| Id            | Int           |               |
+| Type          | String        |               |
+
 ### CatalogBrand
+
+| Property Name | Property Type | Default Value |
+|---------------|---------------|---------------|
+| Id            | Int           |               |
+| Brand         | String        |               |
+
+## DTOs
+
+### ProductDTO
+
+
+| Property Name | Property Type                 | Default Value |
+|---------------|-------------------------------|---------------|
+| Id            | Int                           |               |
+| Name          | String                        |               |
+| Description   | String                        |               |
+| ImageUrl      | String                        |               |
+| Type          | String                        |               |
+| Brand         | String                        |               |
+| Price         | Decimal                       |               |
+
+
+### CatalogBrandDTO
+
+| Property Name | Property Type                 | Default Value |
+|---------------|-------------------------------|---------------|
+| Id            | Int                           |               |
+| BrandName     | String                        |               |
+
+### CatalogTypeDTO
+
+| Property Name | Property Type                 | Default Value |
+|---------------|-------------------------------|---------------|
+| Id            | Int                           |               |
+| TypeName      | String                        |               |
 
 ## Event Emitted Types
 
