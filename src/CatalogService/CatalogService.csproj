@@ -19,4 +19,9 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Data\" />
+      <Folder Include="Repositories\" />
+    </ItemGroup>
+
 </Project>
