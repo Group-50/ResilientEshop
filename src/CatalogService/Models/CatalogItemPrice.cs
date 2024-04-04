@@ -8,6 +8,8 @@ public class CatalogItemPrice
     public DateTime EffectiveFrom { get; set; }
     public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
     // public string CreatedBy { get; set; }
+    
+    protected CatalogItemPrice(){}
 
     protected CatalogItemPrice(int productId, decimal price, DateTime? effectiveFrom)
     {
