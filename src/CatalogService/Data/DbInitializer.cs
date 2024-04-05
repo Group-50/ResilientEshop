@@ -56,41 +56,41 @@ public class DbInitializer
 
         var catalogItems = new List<CatalogItem>()
         {
-            new CatalogItem("Razer BlackWidow", "A keyboard",null, 0, 0),
-            new CatalogItem("Razer DeathStalker", "A keyboard", null, 0, 0),
-            new CatalogItem("Razer Basilisk V3", "A mouse", null, 1, 0),
+            new CatalogItem("Razer BlackWidow", "A keyboard",null, 1, 1),
+            new CatalogItem("Razer DeathStalker", "A keyboard", null, 1, 1),
+            new CatalogItem("Razer Basilisk V3", "A mouse", null, 2, 1),
             
-            new CatalogItem("Ducky One 2", "A keyboard", null, 0, 1),
-            new CatalogItem("Ducky Feather", "A mouse", null, 1, 1),
+            new CatalogItem("Ducky One 2", "A keyboard", null, 1, 2),
+            new CatalogItem("Ducky Feather", "A mouse", null, 2, 2),
             
-            new CatalogItem("Keychron C1", "A keyboard", null, 0, 2),
-            new CatalogItem("Keychron K1 Pro", "A keyboard", null, 0, 2),
-            new CatalogItem("Keychron K10", "A keyboard", null, 0, 3),
+            new CatalogItem("Keychron C1", "A keyboard", null, 1, 3),
+            new CatalogItem("Keychron K1 Pro", "A keyboard", null, 1, 3),
+            new CatalogItem("Keychron K10", "A keyboard", null, 1, 3),
             
-            new CatalogItem("Logitech G PRO X TKL", "A keyboard", null, 0, 3),
-            new CatalogItem("Logitech G203", "A mouse", null, 1, 3),
-            new CatalogItem("Logitech G502", "A mouse", null, 1, 3),
-            new CatalogItem("Logitech G Pro Wireless", "A mouse", null, 1, 3),
-            new CatalogItem("Logitech G305", "A mouse", null, 1, 3)
+            new CatalogItem("Logitech G PRO X TKL", "A keyboard", null, 1, 4),
+            new CatalogItem("Logitech G203", "A mouse", null, 2, 4),
+            new CatalogItem("Logitech G502", "A mouse", null, 2, 4),
+            new CatalogItem("Logitech G Pro Wireless", "A mouse", null, 1, 4),
+            new CatalogItem("Logitech G305", "A mouse", null, 2, 4)
         };
 
         var itemPrices = new List<CatalogItemPrice>()
         {
-            CatalogItemPrice.Create(0, 269, DateTime.UtcNow),
-            CatalogItemPrice.Create(1, 249, DateTime.UtcNow),
-            CatalogItemPrice.Create(2, 89, DateTime.UtcNow),
-            CatalogItemPrice.Create(3, 119, DateTime.Now),
-            CatalogItemPrice.Create(4, 89, DateTime.UtcNow),
-            CatalogItemPrice.Create(5, 99, DateTime.UtcNow),
-            CatalogItemPrice.Create(6, 139, DateTime.UtcNow),
-            CatalogItemPrice.Create(7, 179, DateTime.UtcNow),
-            CatalogItemPrice.Create(8, 269, DateTime.UtcNow),
-            CatalogItemPrice.Create(9, 49, DateTime.UtcNow),
-            CatalogItemPrice.Create(9, 55, DateTime.UtcNow.AddDays(4)),
-            CatalogItemPrice.Create(10, 99, DateTime.UtcNow),
-            CatalogItemPrice.Create(11, 199, DateTime.UtcNow),
-            CatalogItemPrice.Create(12, 209, DateTime.UtcNow.AddDays(-4)),
-            CatalogItemPrice.Create(12, 55, DateTime.UtcNow)
+            CatalogItemPrice.Create(1, 269, DateTime.UtcNow),
+            CatalogItemPrice.Create(2, 249, DateTime.UtcNow),
+            CatalogItemPrice.Create(3, 89, DateTime.UtcNow),
+            CatalogItemPrice.Create(4, 119, DateTime.UtcNow),
+            CatalogItemPrice.Create(5, 89, DateTime.UtcNow),
+            CatalogItemPrice.Create(6, 99, DateTime.UtcNow),
+            CatalogItemPrice.Create(7, 139, DateTime.UtcNow),
+            CatalogItemPrice.Create(8, 179, DateTime.UtcNow),
+            CatalogItemPrice.Create(9, 269, DateTime.UtcNow),
+            CatalogItemPrice.Create(10, 49, DateTime.UtcNow),
+            CatalogItemPrice.Create(10, 55, DateTime.UtcNow.AddDays(4)),
+            CatalogItemPrice.Create(11, 99, DateTime.UtcNow),
+            CatalogItemPrice.Create(12, 199, DateTime.UtcNow),
+            CatalogItemPrice.Create(13, 209, DateTime.UtcNow.AddDays(-4)),
+            CatalogItemPrice.Create(13, 55, DateTime.UtcNow)
 
         };
         

@@ -15,7 +15,7 @@ public class CatalogItemEntityTypeConfiguration
             .HasMaxLength(80);
 
         builder.HasOne(ci => ci.CatalogType)
-            .WithOne();
+            .WithMany();
 
         builder.HasOne(ci => ci.CatalogBrand)
             .WithMany();
