@@ -20,6 +20,7 @@ public class DbInitializer
         if (context.CatalogItems.Any())
         {
             Console.WriteLine("Data already in DB - No seeding required");
+            return;
         }
 
         var catalogBrands = new List<CatalogBrand>()
