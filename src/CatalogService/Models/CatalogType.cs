@@ -1,4 +1,6 @@
-﻿namespace CatalogService.Models;
+﻿using CatalogService.Dtos;
+
+namespace CatalogService.Models;
 
 public class CatalogType
 {
@@ -8,5 +10,17 @@ public class CatalogType
     public override string ToString()
     {
         return Type;
+    }
+}
+
+public static class CatalogTypeMappingExtensions
+{
+    public static CatalogTypeDto AsCatalogTypeDto(this CatalogType type)
+    {
+        return new()
+        {
+            Id = type.Id,
+            TypeName = type.Type
+        };
     }
 }
