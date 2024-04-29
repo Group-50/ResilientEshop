@@ -25,6 +25,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapProductApi();
+app.MapCatalogTypeApi();
+app.MapCatalogBrandApi();
 
 var summaries = new[]
 {

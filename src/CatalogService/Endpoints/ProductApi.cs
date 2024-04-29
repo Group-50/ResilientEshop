@@ -23,7 +23,7 @@ public static class ProductApi
     {
         var catalogItems = await dbContext.CatalogItems.Include(ci => ci.CatalogBrand)
             .Include(ci => ci.CatalogType).ToListAsync();
-        if (catalogItems.Count < 1)
+        if (catalogItems.Count == 0)
         {
             return TypedResults.NotFound("Unable to find the specified products.");
         }
@@ -39,7 +39,7 @@ public static class ProductApi
             .Include(ci => ci.CatalogBrand)
             .Where(ci => ids.Contains(ci.Id))
             .ToListAsync();
-        if (catalogItems.Count == 1)
+        if (catalogItems.Count == 0)
         {
             return TypedResults.NotFound("Could not find the specified items.");
         }
@@ -55,7 +55,8 @@ public static class ProductApi
         {
             return TypedResults.BadRequest("Invalid Product Id");
         }
-        var product = await dbContext.CatalogItems.Include(ci => ci.CatalogBrand)
+        var product = await dbContext.CatalogItems
+            .Include(ci => ci.CatalogBrand)
             .Include(ci => ci.CatalogType)
             .SingleOrDefaultAsync(ci => ci.Id == id);
         if (product is null)
