@@ -1,4 +1,6 @@
-﻿namespace CatalogService.Models;
+﻿using CatalogService.Dtos;
+
+namespace CatalogService.Models;
 
 public class CatalogItem
 {
@@ -31,5 +33,21 @@ public class CatalogItem
     public void AddPriceChange(decimal newPrice, DateTime? effectiveFrom)
     {
         
+    }
+}
+
+public static class CatalogItemMappingExtensions
+{
+    public static ProductDto AsProductDto(this CatalogItem catalogItem)
+    {
+        return new()
+        {
+            Id = catalogItem.Id,
+            Name = catalogItem.Name,
+            Description = catalogItem.Description,
+            ImageUrl = catalogItem.ImageUrl,
+            Type = catalogItem.CatalogType.ToString(),
+            Brand = catalogItem.CatalogBrand.ToString()
+        };
     }
 }
