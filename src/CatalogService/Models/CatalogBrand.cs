@@ -1,4 +1,6 @@
-﻿namespace CatalogService.Models;
+﻿using CatalogService.Dtos;
+
+namespace CatalogService.Models;
 
 public class CatalogBrand
 {
@@ -9,5 +11,17 @@ public class CatalogBrand
     public override string ToString()
     {
         return Brand;
+    }
+}
+
+public static class CatalogBrandMappingExtensions
+{
+    public static CatalogBrandDto AsCatalogBrandDto(this CatalogBrand brand)
+    {
+        return new()
+        {
+            Id = brand.Id,
+            BrandName = brand.Brand
+        };
     }
 }

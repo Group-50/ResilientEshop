@@ -1,4 +1,6 @@
 using CatalogService.Data;
+using CatalogService.Endpoints;
+using CatalogService.Telemetry;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.AddOpenTelemetryMetrics();
+builder.AddDefaultHealthChecks();
+
+
+
 
 builder.Services.AddDbContext<CatalogDbContext>(options =>
 {
@@ -23,6 +30,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.MapProductApi();
+app.MapCatalogTypeApi();
+app.MapCatalogBrandApi();
+app.MapDefaultHealthEndpoints();
 
 var summaries = new[]
 {

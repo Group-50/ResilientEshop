@@ -7,10 +7,11 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["CatalogService/CatalogService.csproj", "CatalogService/"]
+COPY ["CatalogService.csproj", "CatalogService/"]
 RUN dotnet restore "CatalogService/CatalogService.csproj"
-COPY . .
 WORKDIR "/src/CatalogService"
+COPY . .
+
 RUN dotnet build "CatalogService.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
