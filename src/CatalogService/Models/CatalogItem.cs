@@ -40,7 +40,7 @@ public static class CatalogItemMappingExtensions
 {
     public static ProductDto AsProductDto(this CatalogItem catalogItem)
     {
-        return new()
+        return new ProductDto
         {
             Id = catalogItem.Id,
             Name = catalogItem.Name,

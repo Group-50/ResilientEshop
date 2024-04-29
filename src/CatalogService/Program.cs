@@ -1,4 +1,5 @@
 using CatalogService.Data;
+using CatalogService.Endpoints;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.MapProductApi();
 
 var summaries = new[]
 {
