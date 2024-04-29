@@ -1,4 +1,16 @@
 ﻿services: 
+
+  
+  catalogservice:
+    build:
+      context: .
+      dockerfile: src/CatalogService/Dockerfile
+    ports:
+      - 5297:5297
+      - 7204:7204
+    depends_on:
+      - postgres
+  
   postgres:
     image: postgres
     environment:
@@ -7,5 +19,5 @@
       - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
-volumes: 
+volumes:
   pgdata:
