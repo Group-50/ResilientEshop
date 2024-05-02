@@ -1,16 +1,36 @@
 ﻿services: 
 
   
-  catalogservice:
-    build:
-      context: .
-      dockerfile: src/CatalogService/Dockerfile
+#  catalog-service:
+#    build:
+#      context: .
+#      dockerfile: src/CatalogService/Dockerfile
+#    ports:
+#      - 5297:5297
+#      - 7204:7204
+#    depends_on:
+#      - postgres
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
-      - 5297:5297
-      - 7204:7204
-    depends_on:
-      - postgres
-  
+      - 9090:9090
+#  jaeger:
+#    image: jaegertracing/all-in-one
+#    hostname: jaeger
+#    ports:
+#      - 16686:16686
+#    
+#  grafana:
+#    image: grafana/grafana
+#    volumes:
+#      - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+#    environment:
+#      GF_AUTH_ANONYMOUS_ENABLED: "true"
+#      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+#    ports:
+#      - 3000:3000
   postgres:
     image: postgres
     environment:
@@ -21,3 +41,8 @@
       - pgdata:/var/lib/postgresql/data
 volumes:
   pgdata:
+  catalogservice:
+    image: catalogservice
+    build:
+      context: .
+      dockerfile: src/CatalogService/Dockerfile

@@ -37,8 +37,9 @@ var app = builder.Build();
 
 //OTEL
 
-app.MapPrometheusScrapingEndpoint();
+
 app.UseOpenTelemetryPrometheusScrapingEndpoint();
+app.MapPrometheusScrapingEndpoint();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
