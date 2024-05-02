@@ -2,6 +2,8 @@ using CatalogService.Data;
 using CatalogService.Endpoints;
 using CatalogService.Telemetry;
 using Microsoft.EntityFrameworkCore;
+using OpenTelemetry;
+using OpenTelemetry.Metrics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,11 +11,22 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.AddOpenTelemetryMetrics();
-builder.AddDefaultHealthChecks();
+// builder.Services.AddOpenTelemetry()
+//     .WithMetrics(metrics =>
+//     {
+//         metrics.AddPrometheusExporter();
+//         
+//         metrics.AddView("http.server.request.duration",
+//             new ExplicitBucketHistogramConfiguration
+//             {
+//                 Boundaries = new double[] { 0, 0.005, 0.01, 0.025, 0.05,
+//                     0.075, 0.1, 0.25, 0.5, 0.75, 1, 2.5, 5, 7.5, 10 }
+//             });
+//         
+//     });
 
 
-
+builder.AddOpenTelemetry();
 
 builder.Services.AddDbContext<CatalogDbContext>(options =>
 {
@@ -22,6 +35,10 @@ builder.Services.AddDbContext<CatalogDbContext>(options =>
 
 var app = builder.Build();
 
+//OTEL
+
+app.MapPrometheusScrapingEndpoint();
+app.UseOpenTelemetryPrometheusScrapingEndpoint();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -29,11 +46,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
 app.MapProductApi();
 app.MapCatalogTypeApi();
 app.MapCatalogBrandApi();
-app.MapDefaultHealthEndpoints();
+
 
 var summaries = new[]
 {

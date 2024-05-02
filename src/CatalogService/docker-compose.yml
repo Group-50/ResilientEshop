@@ -1,0 +1,59 @@
+services:
+
+#  catalogservice:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    ports:
+#      - 8082:8080
+#      - 5297:5297
+#      - 7204:7204
+##    environment:
+##      - ASPNETCORE_HTTP_PORTS=5297;5297
+##      - ASPNETCORE_HTTPS_PORTS=7204;7204
+##      - ASPNETCORE_URLS=https://+:7204;http://+:5297
+##      - ASPNETCORE_Kestrel__Certificates__Default__Password=Test1234!
+##      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/cert.pfx
+#    depends_on:
+#      - postgres
+#    networks:
+#      - outside
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+#    networks:
+#      - outside
+#  jaeger:
+#    image: jaegertracing/all-in-one
+#    hostname: jaeger
+#    ports:
+#      - 16686:16686
+#    
+#  grafana:
+#    image: grafana/grafana
+#    volumes:
+#      - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+#    environment:
+#      GF_AUTH_ANONYMOUS_ENABLED: "true"
+#      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+#    ports:
+#      - 3000:3000
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgrespw
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
+
+
+networks:
+  outside:
+
