@@ -33,15 +33,15 @@ services:
 #    ports:
 #      - 16686:16686
 #    
-#  grafana:
-#    image: grafana/grafana
-#    volumes:
-#      - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
-#    environment:
-#      GF_AUTH_ANONYMOUS_ENABLED: "true"
-#      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
-#    ports:
-#      - 3000:3000
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+    ports:
+      - 3000:3000
   postgres:
     image: postgres
     environment:
