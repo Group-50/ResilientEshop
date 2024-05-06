@@ -1,0 +1,243 @@
+2024-05-05 22:56:53.709 +10:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2024-05-05 22:56:54.363 +10:00 [DBG] Entity Framework Core 9.0.0-preview.2.24128.4 initialized 'CatalogDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.0-preview.2+ea6f586dee4fa4c1ad9c4278337cf147ba756188' with options: None
+2024-05-05 22:56:54.385 +10:00 [DBG] Creating DbConnection.
+2024-05-05 22:56:54.419 +10:00 [DBG] Created DbConnection. (30ms).
+2024-05-05 22:56:54.432 +10:00 [DBG] Opening connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.544 +10:00 [DBG] Opened connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.549 +10:00 [DBG] Closing connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.562 +10:00 [DBG] Closed connection to database 'catalog' on server 'tcp://localhost:5432' (9ms).
+2024-05-05 22:56:54.576 +10:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2024-05-05 22:56:54.584 +10:00 [DBG] Created DbCommand for 'ExecuteScalar' (9ms).
+2024-05-05 22:56:54.589 +10:00 [DBG] Initialized DbCommand for 'ExecuteScalar' (15ms).
+2024-05-05 22:56:54.592 +10:00 [DBG] Opening connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.619 +10:00 [DBG] Opened connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.627 +10:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-05-05 22:56:54.712 +10:00 [INF] Executed DbCommand (79ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-05-05 22:56:54.719 +10:00 [DBG] Closing connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.725 +10:00 [DBG] Closed connection to database 'catalog' on server 'tcp://localhost:5432' (6ms).
+2024-05-05 22:56:54.744 +10:00 [DBG] Opening connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.748 +10:00 [DBG] Opened connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.752 +10:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2024-05-05 22:56:54.754 +10:00 [DBG] Created DbCommand for 'ExecuteReader' (2ms).
+2024-05-05 22:56:54.756 +10:00 [DBG] Initialized DbCommand for 'ExecuteReader' (4ms).
+2024-05-05 22:56:54.760 +10:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2024-05-05 22:56:54.767 +10:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2024-05-05 22:56:54.780 +10:00 [DBG] Closing data reader to 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.787 +10:00 [DBG] A data reader for 'catalog' on server 'tcp://localhost:5432' is being disposed after spending 13ms reading results.
+2024-05-05 22:56:54.794 +10:00 [DBG] Closing connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.797 +10:00 [DBG] Closed connection to database 'catalog' on server 'tcp://localhost:5432' (3ms).
+2024-05-05 22:56:54.802 +10:00 [DBG] Migrating using database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.804 +10:00 [DBG] Opening connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.820 +10:00 [DBG] Opened connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.824 +10:00 [DBG] Closing connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.827 +10:00 [DBG] Closed connection to database 'catalog' on server 'tcp://localhost:5432' (2ms).
+2024-05-05 22:56:54.831 +10:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2024-05-05 22:56:54.835 +10:00 [DBG] Created DbCommand for 'ExecuteScalar' (4ms).
+2024-05-05 22:56:54.837 +10:00 [DBG] Initialized DbCommand for 'ExecuteScalar' (6ms).
+2024-05-05 22:56:54.839 +10:00 [DBG] Opening connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.841 +10:00 [DBG] Opened connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.844 +10:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-05-05 22:56:54.850 +10:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-05-05 22:56:54.856 +10:00 [DBG] Closing connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.857 +10:00 [DBG] Closed connection to database 'catalog' on server 'tcp://localhost:5432' (1ms).
+2024-05-05 22:56:54.861 +10:00 [DBG] Opening connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.874 +10:00 [DBG] Opened connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.876 +10:00 [DBG] Closing connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.878 +10:00 [DBG] Closed connection to database 'catalog' on server 'tcp://localhost:5432' (1ms).
+2024-05-05 22:56:54.880 +10:00 [DBG] Creating DbCommand for 'ExecuteScalar'.
+2024-05-05 22:56:54.882 +10:00 [DBG] Created DbCommand for 'ExecuteScalar' (2ms).
+2024-05-05 22:56:54.884 +10:00 [DBG] Initialized DbCommand for 'ExecuteScalar' (4ms).
+2024-05-05 22:56:54.887 +10:00 [DBG] Opening connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.891 +10:00 [DBG] Opened connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.897 +10:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-05-05 22:56:54.905 +10:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2024-05-05 22:56:54.911 +10:00 [DBG] Closing connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.915 +10:00 [DBG] Closed connection to database 'catalog' on server 'tcp://localhost:5432' (3ms).
+2024-05-05 22:56:54.917 +10:00 [DBG] Opening connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.922 +10:00 [DBG] Opened connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.925 +10:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2024-05-05 22:56:54.926 +10:00 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2024-05-05 22:56:54.929 +10:00 [DBG] Initialized DbCommand for 'ExecuteReader' (3ms).
+2024-05-05 22:56:54.932 +10:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2024-05-05 22:56:54.936 +10:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2024-05-05 22:56:54.938 +10:00 [DBG] Closing data reader to 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.940 +10:00 [DBG] A data reader for 'catalog' on server 'tcp://localhost:5432' is being disposed after spending 1ms reading results.
+2024-05-05 22:56:54.942 +10:00 [DBG] Closing connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:54.944 +10:00 [DBG] Closed connection to database 'catalog' on server 'tcp://localhost:5432' (1ms).
+2024-05-05 22:56:54.956 +10:00 [INF] No migrations were applied. The database is already up to date.
+2024-05-05 22:56:54.978 +10:00 [DBG] Compiling query expression: 
+'DbSet<CatalogItem>()
+    .Any()'
+2024-05-05 22:56:55.103 +10:00 [DBG] Generated query execution expression: 
+'queryContext => new SingleQueryingEnumerable<bool>(
+    (RelationalQueryContext)queryContext, 
+    RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> 0
+        SELECT EXISTS (
+            SELECT 1
+            FROM catalog AS c)), 
+    null, 
+    Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, bool>, 
+    CatalogService.Data.CatalogDbContext, 
+    False, 
+    False, 
+    True
+)
+    .Single()'
+2024-05-05 22:56:55.121 +10:00 [DBG] Opening connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:55.126 +10:00 [DBG] Opened connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:55.128 +10:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2024-05-05 22:56:55.130 +10:00 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2024-05-05 22:56:55.131 +10:00 [DBG] Initialized DbCommand for 'ExecuteReader' (2ms).
+2024-05-05 22:56:55.134 +10:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM catalog AS c)
+2024-05-05 22:56:55.139 +10:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM catalog AS c)
+2024-05-05 22:56:55.147 +10:00 [DBG] Closing data reader to 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:55.149 +10:00 [DBG] A data reader for 'catalog' on server 'tcp://localhost:5432' is being disposed after spending 5ms reading results.
+2024-05-05 22:56:55.151 +10:00 [DBG] Closing connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:55.152 +10:00 [DBG] Closed connection to database 'catalog' on server 'tcp://localhost:5432' (1ms).
+2024-05-05 22:56:55.155 +10:00 [DBG] 'CatalogDbContext' disposed.
+2024-05-05 22:56:55.157 +10:00 [DBG] Disposing connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:56:55.159 +10:00 [DBG] Disposed connection to database 'catalog' on server 'tcp://localhost:5432' (1ms).
+2024-05-05 22:56:55.164 +10:00 [DBG] Hosting starting
+2024-05-05 22:56:55.214 +10:00 [INF] Now listening on: http://localhost:5297
+2024-05-05 22:56:55.217 +10:00 [DBG] Loaded hosting startup assembly CatalogService
+2024-05-05 22:56:55.220 +10:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-05-05 22:56:55.223 +10:00 [INF] Hosting environment: Development
+2024-05-05 22:56:55.226 +10:00 [INF] Content root path: C:\Users\ialia\Source\Repos\Group-50\resilient-eshop\src\CatalogService
+2024-05-05 22:56:55.227 +10:00 [DBG] Hosting started
+2024-05-05 22:56:58.125 +10:00 [DBG] Connection id "0HN3D0BCJ9P9N" accepted.
+2024-05-05 22:56:58.129 +10:00 [DBG] Connection id "0HN3D0BCJ9P9N" started.
+2024-05-05 22:56:58.129 +10:00 [DBG] Connection id "0HN3D0BCJ9P9O" accepted.
+2024-05-05 22:56:58.136 +10:00 [DBG] Connection id "0HN3D0BCJ9P9O" started.
+2024-05-05 22:56:58.214 +10:00 [INF] Request starting HTTP/1.1 GET http://localhost:5297/swagger/index.html - null null
+2024-05-05 22:56:58.227 +10:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2024-05-05 22:56:58.606 +10:00 [DBG] No candidates found for the request path '/swagger/index.html'
+2024-05-05 22:56:58.611 +10:00 [DBG] Request did not match any endpoints
+2024-05-05 22:56:58.823 +10:00 [DBG] Connection id "0HN3D0BCJ9P9N" completed keep alive response.
+2024-05-05 22:56:58.830 +10:00 [INF] Request finished HTTP/1.1 GET http://localhost:5297/swagger/index.html - 200 null text/html;charset=utf-8 620.2632ms
+2024-05-05 22:56:58.970 +10:00 [INF] Request starting HTTP/1.1 GET http://localhost:5297/swagger/v1/swagger.json - null null
+2024-05-05 22:56:58.982 +10:00 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2024-05-05 22:56:58.983 +10:00 [DBG] Request did not match any endpoints
+2024-05-05 22:56:59.000 +10:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2024-05-05 22:56:59.301 +10:00 [DBG] Connection id "0HN3D0BCJ9P9N" completed keep alive response.
+2024-05-05 22:56:59.305 +10:00 [INF] Request finished HTTP/1.1 GET http://localhost:5297/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 334.2294ms
+2024-05-05 22:57:10.774 +10:00 [INF] Request starting HTTP/1.1 GET http://localhost:5297/products/by?ids=1 - null null
+2024-05-05 22:57:10.801 +10:00 [DBG] 1 candidate(s) found for the request path '/products/by'
+2024-05-05 22:57:10.808 +10:00 [DBG] Request matched endpoint 'HTTP: GET /products/by'
+2024-05-05 22:57:10.821 +10:00 [DBG] Static files was skipped as the request already matched an endpoint.
+2024-05-05 22:57:10.828 +10:00 [WRN] Failed to determine the https port for redirect.
+2024-05-05 22:57:10.838 +10:00 [INF] Executing endpoint 'HTTP: GET /products/by'
+2024-05-05 22:57:10.870 +10:00 [INF] Looking up products with IDs: 1
+2024-05-05 22:57:10.918 +10:00 [DBG] Entity Framework Core 9.0.0-preview.2.24128.4 initialized 'CatalogDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.0-preview.2+ea6f586dee4fa4c1ad9c4278337cf147ba756188' with options: None
+2024-05-05 22:57:10.966 +10:00 [DBG] Compiling query expression: 
+'DbSet<CatalogItem>()
+    .Where(product => __idList_0.Contains(product.Id))'
+2024-05-05 22:57:11.220 +10:00 [DBG] Generated query execution expression: 
+'queryContext => new SingleQueryingEnumerable<CatalogItem>(
+    (RelationalQueryContext)queryContext, 
+    RelationalCommandCache.QueryExpression(
+        Projection Mapping:
+            EmptyProjectionMember -> Dictionary<IProperty, int> { [Property: CatalogItem.Id (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: CatalogItem.CatalogBrandId (int) Required FK Index, 1], [Property: CatalogItem.CatalogTypeId (int) Required FK Index, 2], [Property: CatalogItem.Description (string) Required, 3], [Property: CatalogItem.ImageUrl (string), 4], [Property: CatalogItem.Name (string) Required MaxLength(80), 5] }
+        SELECT c.Id, c.CatalogBrandId, c.CatalogTypeId, c.Description, c.ImageUrl, c.Name
+        FROM catalog AS c
+        WHERE c.Id = ANY(@__idList_0)), 
+    null, 
+    Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, CatalogItem>, 
+    CatalogService.Data.CatalogDbContext, 
+    False, 
+    False, 
+    True
+)'
+2024-05-05 22:57:11.261 +10:00 [DBG] Creating DbConnection.
+2024-05-05 22:57:11.265 +10:00 [DBG] Created DbConnection. (3ms).
+2024-05-05 22:57:11.272 +10:00 [DBG] Opening connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:57:11.280 +10:00 [DBG] Opened connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:57:11.285 +10:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2024-05-05 22:57:11.291 +10:00 [DBG] Created DbCommand for 'ExecuteReader' (6ms).
+2024-05-05 22:57:11.301 +10:00 [DBG] Initialized DbCommand for 'ExecuteReader' (16ms).
+2024-05-05 22:57:11.312 +10:00 [DBG] Executing DbCommand [Parameters=[@__idList_0='?' (DbType = Object)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CatalogBrandId", c."CatalogTypeId", c."Description", c."ImageUrl", c."Name"
+FROM catalog AS c
+WHERE c."Id" = ANY (@__idList_0)
+2024-05-05 22:57:11.523 +10:00 [INF] Executed DbCommand (216ms) [Parameters=[@__idList_0='?' (DbType = Object)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CatalogBrandId", c."CatalogTypeId", c."Description", c."ImageUrl", c."Name"
+FROM catalog AS c
+WHERE c."Id" = ANY (@__idList_0)
+2024-05-05 22:57:11.641 +10:00 [DBG] Context 'CatalogDbContext' started tracking 'CatalogItem' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2024-05-05 22:57:11.738 +10:00 [DBG] Closing data reader to 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:57:11.743 +10:00 [DBG] A data reader for 'catalog' on server 'tcp://localhost:5432' is being disposed after spending 205ms reading results.
+2024-05-05 22:57:11.757 +10:00 [DBG] Closing connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:57:11.763 +10:00 [DBG] Closed connection to database 'catalog' on server 'tcp://localhost:5432' (6ms).
+2024-05-05 22:57:11.770 +10:00 [INF] Found 1 products for given IDs.
+2024-05-05 22:57:11.775 +10:00 [INF] Setting HTTP status code 200.
+2024-05-05 22:57:11.807 +10:00 [INF] Writing value of type 'List`1' as Json.
+2024-05-05 22:57:11.829 +10:00 [INF] Executed endpoint 'HTTP: GET /products/by'
+2024-05-05 22:57:11.839 +10:00 [DBG] Connection id "0HN3D0BCJ9P9N" completed keep alive response.
+2024-05-05 22:57:11.847 +10:00 [DBG] 'CatalogDbContext' disposed.
+2024-05-05 22:57:11.857 +10:00 [DBG] Disposing connection to database 'catalog' on server 'tcp://localhost:5432'.
+2024-05-05 22:57:11.865 +10:00 [DBG] Disposed connection to database 'catalog' on server 'tcp://localhost:5432' (7ms).
+2024-05-05 22:57:11.871 +10:00 [INF] Request finished HTTP/1.1 GET http://localhost:5297/products/by?ids=1 - 200 null application/json; charset=utf-8 1096.8695ms
+2024-05-05 22:57:32.322 +10:00 [INF] Application is shutting down...
+2024-05-05 22:57:32.324 +10:00 [DBG] Hosting stopping
+2024-05-05 22:57:32.340 +10:00 [DBG] Connection id "0HN3D0BCJ9P9N" disconnecting.
+2024-05-05 22:57:32.340 +10:00 [DBG] Connection id "0HN3D0BCJ9P9O" disconnecting.
+2024-05-05 22:57:32.346 +10:00 [DBG] Connection id "0HN3D0BCJ9P9N" stopped.
+2024-05-05 22:57:32.347 +10:00 [DBG] Connection id "0HN3D0BCJ9P9O" stopped.
+2024-05-05 22:57:32.352 +10:00 [DBG] Connection id "0HN3D0BCJ9P9O" sending FIN because: "The Socket transport's send loop completed gracefully."
+2024-05-05 22:57:32.352 +10:00 [DBG] Connection id "0HN3D0BCJ9P9N" sending FIN because: "The Socket transport's send loop completed gracefully."
+2024-05-05 22:57:32.357 +10:00 [DBG] Hosting stopped
