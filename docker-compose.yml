@@ -1,5 +1,9 @@
 ﻿version: '3.8'
 
+networks:
+  monitoring:
+    driver: bridge
+
 services:
   otel-collector:
     image: otel/opentelemetry-collector-contrib
@@ -93,8 +97,3 @@ services:
 volumes:
   pgdata:
   grafana-data:
-  catalogservice:
-    image: catalogservice
-    build:
-      context: .
-      dockerfile: src/CatalogService/Dockerfile
