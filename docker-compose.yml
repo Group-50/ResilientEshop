@@ -1,9 +1,5 @@
 ﻿version: '3.8'
 
-networks:
-  monitoring:
-    driver: bridge
-
 services:
   otel-collector:
     image: otel/opentelemetry-collector-contrib
@@ -49,51 +45,34 @@ services:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - 9090:9090
-    networks:
-      - monitoring
-
-  alertmanager:
-    image: prom/alertmanager
-    volumes:
-      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
-    ports:
-      - 9093:9093
-    networks:
-      - monitoring
-
-  nodeexporter:
-    image: prom/node-exporter
-    ports:
-      - 9100:9100
-    networks:
-      - monitoring
-
-  jaeger:
-    image: jaegertracing/all-in-one
-    ports:
-      - 16686:16686
-    networks:
-      - monitoring
-
-  grafana:
-    image: grafana/grafana
-    volumes:
-      - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+#  jaeger:
+#    image: jaegertracing/all-in-one
+#    hostname: jaeger
+#    ports:
+#      - 16686:16686
+#    
+#  grafana:
+#    image: grafana/grafana
+#    volumes:
+#      - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+#    environment:
+#      GF_AUTH_ANONYMOUS_ENABLED: "true"
+#      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+#    ports:
+#      - 3000:3000
+  postgres:
+    image: postgres
     environment:
-      GF_AUTH_ANONYMOUS_ENABLED: "true"
-      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+      - POSTGRES_PASSWORD=postgrespw
     ports:
-      - 3000:3000
-    networks:
-      - monitoring
-
-  loki:
-    image: grafana/loki:latest
-    ports:
-      - 3100:3100
-    networks:
-      - monitoring
-
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
 volumes:
   pgdata:
   grafana-data:
+  catalogservice:
+    image: catalogservice
+    build:
+      context: .
+      dockerfile: src/CatalogService/Dockerfile
