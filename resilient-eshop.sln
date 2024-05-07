@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService", "src\Iden
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogService", "src\CatalogService\CatalogService.csproj", "{E19402CB-29FA-492F-9815-319BBBFC5EAA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceDefaults", "src\ServiceDefaults\ServiceDefaults.csproj", "{9D7D23F5-B6A7-4B33-8810-18DF2CF5494D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,5 +34,9 @@ Global
 		{E19402CB-29FA-492F-9815-319BBBFC5EAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E19402CB-29FA-492F-9815-319BBBFC5EAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E19402CB-29FA-492F-9815-319BBBFC5EAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D7D23F5-B6A7-4B33-8810-18DF2CF5494D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D7D23F5-B6A7-4B33-8810-18DF2CF5494D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D7D23F5-B6A7-4B33-8810-18DF2CF5494D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D7D23F5-B6A7-4B33-8810-18DF2CF5494D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
