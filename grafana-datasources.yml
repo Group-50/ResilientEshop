@@ -5,6 +5,11 @@ datasources:
     uid: prom
     access: proxy
     url: http://prometheus:9090
+  
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://loki:3100
     
   - name: Jaeger
     type: jaeger

@@ -1,46 +1,98 @@
-﻿services: 
+﻿version: '3.8'
+
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib
+    command: ["--config=/etc/otel/config.yaml"]
+    volumes:
+      - ./otel-config.yaml:/etc/otel/config.yaml
+    ports:
+      - "4317:4317" # gRPC port for receiving traces
+      - "4318:4318" # HTTP port for receiving metrics and logs
+    depends_on:
+      - prometheus
+      - jaeger
+    networks:
+      - monitoring
 
   
-#  catalog-service:
-#    build:
-#      context: .
-#      dockerfile: src/CatalogService/Dockerfile
-#    ports:
-#      - 5297:5297
-#      - 7204:7204
-#    depends_on:
-#      - postgres
+  catalog-service:
+    build:
+      context: .
+      dockerfile: src/CatalogService/Dockerfile
+    ports:
+      - 5297:5297
+      - 7204:7204
+    networks:
+      - monitoring
+    depends_on:
+      - postgres
+    
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgrespw
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - monitoring
+
   prometheus:
     image: prom/prometheus
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - 9090:9090
-#  jaeger:
-#    image: jaegertracing/all-in-one
-#    hostname: jaeger
-#    ports:
-#      - 16686:16686
-#    
-#  grafana:
-#    image: grafana/grafana
-#    volumes:
-#      - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
-#    environment:
-#      GF_AUTH_ANONYMOUS_ENABLED: "true"
-#      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
-#    ports:
-#      - 3000:3000
-  postgres:
-    image: postgres
-    environment:
-      - POSTGRES_PASSWORD=postgrespw
-    ports:
-      - 5432:5432
+    networks:
+      - monitoring
+
+  alertmanager:
+    image: prom/alertmanager
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    ports:
+      - 9093:9093
+    networks:
+      - monitoring
+
+  nodeexporter:
+    image: prom/node-exporter
+    ports:
+      - 9100:9100
+    networks:
+      - monitoring
+
+  jaeger:
+    image: jaegertracing/all-in-one
+    ports:
+      - 16686:16686
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+    ports:
+      - 3000:3000
+    networks:
+      - monitoring
+
+  loki:
+    image: grafana/loki:latest
+    ports:
+      - 3100:3100
+    networks:
+      - monitoring
+
 volumes:
   pgdata:
+  grafana-data:
   catalogservice:
     image: catalogservice
     build:
