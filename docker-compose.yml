@@ -27,17 +27,6 @@ services:
       - monitoring
     depends_on:
       - postgres
-    
-  postgres:
-    image: postgres
-    environment:
-      - POSTGRES_PASSWORD=postgrespw
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
-    networks:
-      - monitoring
 
   prometheus:
     image: prom/prometheus
