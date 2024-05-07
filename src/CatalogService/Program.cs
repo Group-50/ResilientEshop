@@ -4,6 +4,7 @@ using CatalogService.Telemetry;
 using Microsoft.EntityFrameworkCore;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
+using ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,20 +27,22 @@ builder.Services.AddSwaggerGen();
 //     });
 
 
-builder.AddOpenTelemetry();
+// builder.AddOpenTelemetry();
 
 builder.Services.AddDbContext<CatalogDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.AddServiceDefaults();
+
 var app = builder.Build();
 
 //OTEL
 
 
-app.UseOpenTelemetryPrometheusScrapingEndpoint();
-app.MapPrometheusScrapingEndpoint();
+// app.UseOpenTelemetryPrometheusScrapingEndpoint();
+// app.MapPrometheusScrapingEndpoint();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
