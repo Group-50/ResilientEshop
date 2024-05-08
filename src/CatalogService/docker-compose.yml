@@ -1,38 +1,42 @@
-services:
+version: '3.8'
 
-#  catalogservice:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-#    ports:
-#      - 8082:8080
-#      - 5297:5297
-#      - 7204:7204
-##    environment:
-##      - ASPNETCORE_HTTP_PORTS=5297;5297
-##      - ASPNETCORE_HTTPS_PORTS=7204;7204
-##      - ASPNETCORE_URLS=https://+:7204;http://+:5297
-##      - ASPNETCORE_Kestrel__Certificates__Default__Password=Test1234!
-##      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/cert.pfx
-#    depends_on:
-#      - postgres
-#    networks:
-#      - outside
+services:
+  catalog-service:
+    build:
+      context: ./CatalogService
+      dockerfile: Dockerfile
+    ports:
+      - 8082:8080
+      - 5297:5297
+      - 7204:7204
+    environment:
+      - ASPNETCORE_HTTP_PORTS=5297;5297
+      - ASPNETCORE_HTTPS_PORTS=7204;7204
+      - ASPNETCORE_URLS=https://+:7204;http://+:5297
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Test1234!
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/cert.pfx
+    depends_on:
+      - postgres
+    networks:
+      - monitoring
 
   prometheus:
     image: prom/prometheus
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - .Prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - 9090:9090
-#    networks:
-#      - outside
-#  jaeger:
-#    image: jaegertracing/all-in-one
-#    hostname: jaeger
-#    ports:
-#      - 16686:16686
-#    
+    networks:
+      - monitoring
+
+  jaeger:
+    image: jaegertracing/all-in-one
+    hostname: jaeger
+    ports:
+      - 16686:16686
+    networks:
+      - monitoring
+
   grafana:
     image: grafana/grafana
     volumes:
@@ -42,18 +46,54 @@ services:
       GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
     ports:
       - 3000:3000
+    networks:
+      - monitoring
+
   postgres:
     image: postgres
     environment:
       - POSTGRES_PASSWORD=postgrespw
-    ports:
-      - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
-volumes:
-  pgdata:
+    ports:
+      - 5432:5432
+    networks:
+      - monitoring
 
+  nodeexporter:
+    image: prom/node-exporter
+    ports:
+      - 9100:9100
+    networks:
+      - monitoring
+
+  alertmanager:
+    image: prom/alertmanager
+    volumes:
+      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    ports:
+      - 9093:9093
+    networks:
+      - monitoring
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib
+    command: ["--config=/etc/otel/config.yaml"]
+    volumes:
+      - ./CatalogService/Telemetry/otel-config.yaml:/etc/otel/config.yaml
+    ports:
+      - "4317:4317" # gRPC port for receiving traces
+      - "4318:4318" # HTTP port for receiving metrics and logs
+    depends_on:
+      - prometheus
+      - jaeger
+    networks:
+      - monitoring
 
 networks:
-  outside:
+  monitoring:
+    driver: bridge
 
+volumes:
+  pgdata:
+  grafana-data:

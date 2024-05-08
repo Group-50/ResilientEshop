@@ -1,15 +1,33 @@
-﻿services: 
+﻿version: '3.8'
+
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib
+    command: ["--config=/etc/otel/config.yaml"]
+    volumes:
+      - ./otel-config.yaml:/etc/otel/config.yaml
+    ports:
+      - "4317:4317" # gRPC port for receiving traces
+      - "4318:4318" # HTTP port for receiving metrics and logs
+    depends_on:
+      - prometheus
+      - jaeger
+    networks:
+      - monitoring
 
   
-#  catalog-service:
-#    build:
-#      context: .
-#      dockerfile: src/CatalogService/Dockerfile
-#    ports:
-#      - 5297:5297
-#      - 7204:7204
-#    depends_on:
-#      - postgres
+  catalog-service:
+    build:
+      context: .
+      dockerfile: src/CatalogService/Dockerfile
+    ports:
+      - 5297:5297
+      - 7204:7204
+    networks:
+      - monitoring
+    depends_on:
+      - postgres
+
   prometheus:
     image: prom/prometheus
     volumes:
@@ -41,6 +59,7 @@
       - pgdata:/var/lib/postgresql/data
 volumes:
   pgdata:
+  grafana-data:
   catalogservice:
     image: catalogservice
     build:
