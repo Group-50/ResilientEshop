@@ -2,8 +2,10 @@ using CatalogService.Data;
 using CatalogService.Endpoints;
 using CatalogService.Telemetry;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
+using Polly;
 using ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,10 +30,11 @@ builder.Services.AddSwaggerGen();
 
 
 // builder.AddOpenTelemetry();
-
+var conn = builder.Configuration.GetConnectionString("DefaultConnection");
+Console.WriteLine(conn);
 builder.Services.AddDbContext<CatalogDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseNpgsql(conn);
 });
 
 builder.AddServiceDefaults();
@@ -77,7 +80,13 @@ app.MapGet("/weatherforecast", () =>
     .WithName("GetWeatherForecast")
     .WithOpenApi();
 
-DbInitializer.InitDb(app);
+var retryPolicy = Policy
+    .Handle<NpgsqlException>()
+    .WaitAndRetry(5, retryAttempt => TimeSpan.FromSeconds(10));
+
+retryPolicy.ExecuteAndCapture(() => DbInitializer.InitDb(app));
+
+
 
 app.Run();
 

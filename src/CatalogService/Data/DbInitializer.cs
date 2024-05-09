@@ -9,7 +9,7 @@ public class DbInitializer
     {
         using var scope = app.Services.CreateScope();
         {
-            SeedData(scope.ServiceProvider.GetService<CatalogDbContext>());
+           SeedData(scope.ServiceProvider.GetService<CatalogDbContext>());
         }
     }
     //TODO: Refactor
@@ -21,8 +21,9 @@ public class DbInitializer
         {
             Console.WriteLine("Data already in DB - No seeding required");
             return;
-        }
 
+        }
+        
         var catalogBrands = new List<CatalogBrand>()
         {
             new CatalogBrand
@@ -95,12 +96,12 @@ public class DbInitializer
 
         };
         
-        context.AddRange(catalogBrands);
+        context.AddRange(catalogBrands); 
         context.AddRange(catalogTypes);
         context.SaveChanges();
         context.AddRange(catalogItems);
         context.SaveChanges();
-        context.AddRange(itemPrices);
+        context.AddRange(itemPrices); 
         context.SaveChanges();
     }
 }
