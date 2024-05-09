@@ -42,4 +42,9 @@
       <None Remove="otel-config.yml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="prometheus-grafana\dashboards\aspnetcore.json" />
+      <_ContentIncludedByDefault Remove="prometheus-grafana\dashboards\aspnetcore_endpoint.json" />
+    </ItemGroup>
+
 </Project>
