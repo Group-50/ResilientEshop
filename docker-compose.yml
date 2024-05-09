@@ -23,7 +23,7 @@ services:
   prometheus:
     image: prom/prometheus
     volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - 9090:9090
     networks:
@@ -40,7 +40,7 @@ services:
   grafana:
     image: grafana/grafana
     volumes:
-      - ./grafana-datasources/grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+      - ./monitoring/grafana-datasources/grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
     environment:
       GF_AUTH_ANONYMOUS_ENABLED: "true"
       GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
@@ -70,7 +70,7 @@ services:
   alertmanager:
     image: prom/alertmanager
     volumes:
-      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - ./monitoring/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
     ports:
       - 9093:9093
     networks:
@@ -78,9 +78,9 @@ services:
 
   otel-collector:
     image: otel/opentelemetry-collector-contrib
-    command: ["--config=/etc/otel/config.yaml"]
+    command: ["--config=/etc/otel/config.yml"]
     volumes:
-      - ./telemetry/otel-config.yml:/etc/otel/config.yml
+      - ./monitoring/otel/config.yml:/etc/otel/config.yml
     ports:
       - "4317:4317" # gRPC port for receiving traces
       - "4318:4318" # HTTP port for receiving metrics and logs
