@@ -37,4 +37,9 @@
       <ProjectReference Include="..\ServiceDefaults\ServiceDefaults.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="grafana-datasources.yml" />
+      <None Remove="otel-config.yml" />
+    </ItemGroup>
+
 </Project>
