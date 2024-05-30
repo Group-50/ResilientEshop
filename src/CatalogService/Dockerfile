@@ -11,12 +11,14 @@ COPY /src/ServiceDefaults/ServiceDefaults.csproj src/ServiceDefaults/ServiceDefa
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 
+
 COPY src/CatalogService/ src/CatalogService/
 COPY src/ServiceDefaults/ src/ServiceDefaults/
 
 RUN dotnet restore "src/CatalogService/CatalogService.csproj"
 
 RUN dotnet build "src/CatalogService/CatalogService.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release

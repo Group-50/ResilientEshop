@@ -14,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 // builder.Services.AddOpenTelemetry()
 //     .WithMetrics(metrics =>
 //     {
@@ -27,6 +28,7 @@ builder.Services.AddSwaggerGen();
 //             });
 //         
 //     });
+
 
 
 // builder.AddOpenTelemetry();
@@ -58,6 +60,7 @@ app.UseHttpsRedirection();
 app.MapProductApi();
 app.MapCatalogTypeApi();
 app.MapCatalogBrandApi();
+app.MapDefaultHealthEndpoints();
 
 
 var summaries = new[]

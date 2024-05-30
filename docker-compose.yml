@@ -1,7 +1,8 @@
-﻿version: '3.8'
 
-services:
-  catalog-service:
+﻿services: 
+
+  
+  catalogservice:
     build:
       context: .
       dockerfile: src/CatalogService/Dockerfile
@@ -45,6 +46,7 @@ services:
       - 3000:3000
     networks:
       - monitoring
+
 
   postgres:
     image: postgres
@@ -94,4 +96,5 @@ networks:
 volumes:
   pgdata:
   grafana-data:
+
 
