@@ -2,6 +2,11 @@ using CatalogService.Data;
 using CatalogService.Endpoints;
 using CatalogService.Telemetry;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
+using OpenTelemetry;
+using OpenTelemetry.Metrics;
+using Polly;
+using ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,19 +14,40 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.AddOpenTelemetryMetrics();
-builder.AddDefaultHealthChecks();
+
+// builder.Services.AddOpenTelemetry()
+//     .WithMetrics(metrics =>
+//     {
+//         metrics.AddPrometheusExporter();
+//         
+//         metrics.AddView("http.server.request.duration",
+//             new ExplicitBucketHistogramConfiguration
+//             {
+//                 Boundaries = new double[] { 0, 0.005, 0.01, 0.025, 0.05,
+//                     0.075, 0.1, 0.25, 0.5, 0.75, 1, 2.5, 5, 7.5, 10 }
+//             });
+//         
+//     });
 
 
 
-
+// builder.AddOpenTelemetry();
+var conn = builder.Configuration.GetConnectionString("DefaultConnection");
+Console.WriteLine(conn);
 builder.Services.AddDbContext<CatalogDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseNpgsql(conn);
 });
+
+builder.AddServiceDefaults();
 
 var app = builder.Build();
 
+//OTEL
+
+
+// app.UseOpenTelemetryPrometheusScrapingEndpoint();
+// app.MapPrometheusScrapingEndpoint();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -29,11 +55,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
 app.MapProductApi();
 app.MapCatalogTypeApi();
 app.MapCatalogBrandApi();
 app.MapDefaultHealthEndpoints();
+
 
 var summaries = new[]
 {
@@ -55,7 +83,13 @@ app.MapGet("/weatherforecast", () =>
     .WithName("GetWeatherForecast")
     .WithOpenApi();
 
-DbInitializer.InitDb(app);
+var retryPolicy = Policy
+    .Handle<NpgsqlException>()
+    .WaitAndRetry(5, retryAttempt => TimeSpan.FromSeconds(10));
+
+retryPolicy.ExecuteAndCapture(() => DbInitializer.InitDb(app));
+
+
 
 app.Run();
 
