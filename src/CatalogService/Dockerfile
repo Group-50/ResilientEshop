@@ -4,19 +4,25 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
+COPY resilient-eshop.sln .
+COPY /src/CatalogService/CatalogService.csproj src/CatalogService/CatalogService.csproj
+COPY /src/ServiceDefaults/ServiceDefaults.csproj src/ServiceDefaults/ServiceDefaults.csproj
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY ["CatalogService.csproj", "CatalogService/"]
-RUN dotnet restore "CatalogService/CatalogService.csproj"
-WORKDIR "/src/CatalogService"
-COPY . .
 
-RUN dotnet build "CatalogService.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+COPY src/CatalogService/ src/CatalogService/
+COPY src/ServiceDefaults/ src/ServiceDefaults/
+
+RUN dotnet restore "src/CatalogService/CatalogService.csproj"
+
+RUN dotnet build "src/CatalogService/CatalogService.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "CatalogService.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "src/CatalogService/CatalogService.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
