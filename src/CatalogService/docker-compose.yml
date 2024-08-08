@@ -40,7 +40,7 @@ services:
   grafana:
     image: grafana/grafana
     volumes:
-      - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+      - ./grafana-datasources.yml/grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
     environment:
       GF_AUTH_ANONYMOUS_ENABLED: "true"
       GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
@@ -70,7 +70,7 @@ services:
   alertmanager:
     image: prom/alertmanager
     volumes:
-      - alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
     ports:
       - 9093:9093
     networks:
@@ -80,7 +80,7 @@ services:
     image: otel/opentelemetry-collector-contrib
     command: ["--config=/etc/otel/config.yaml"]
     volumes:
-      - ./CatalogService/Telemetry/otel-config.yaml:/etc/otel/config.yaml
+      - ./CatalogService/otel-config.yaml:/etc/otel/config.yaml
     ports:
       - "4317:4317" # gRPC port for receiving traces
       - "4318:4318" # HTTP port for receiving metrics and logs

@@ -1,0 +1,44 @@
+extensions:
+  health_check:
+  zpages:
+    endpoint: :55679
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+
+processors:
+  batch:
+
+exporters:
+  logging:
+    loglevel: debug
+  jaeger:
+    endpoint: "jaeger:14250"  # Adjust if Jaeger is set up to receive traces on a different port
+    tls:
+      insecure: true
+  prometheus:
+    endpoint: "0.0.0.0:8889"  # Expose Prometheus at port 8889
+  otlp:
+    endpoint: "jaeger:14250"  # Reusing Jaeger endpoint for simplicity; adjust based on actual setup
+    tls:
+      insecure: true
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [jaeger, logging, otlp]
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [prometheus, logging]
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging]
+
+  extensions: [health_check, zpages]
